@@ -57,7 +57,7 @@ bot.on('message', async (msg) => {
     }
     })
 app.post('/web-data', async (req, res) => {
-    console.log('Received POST request to /web-data:', req.body); // Выводим тело запроса в консоль
+    console.log('Received POST request to /web-data:', req.body); // Логирование тела запроса
     const { queryId, products, totalPrice } = req.body;
     try {
         await bot.answerWebAppQuery(queryId, {
@@ -79,6 +79,7 @@ app.post('/web-data', async (req, res) => {
         return res.status(500).json({});
     }
 });
+
 
 app.get('/web-data', (req, res) => {
     res.status(405).send('Method Not Allowed');
