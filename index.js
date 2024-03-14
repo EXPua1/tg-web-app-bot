@@ -56,6 +56,9 @@ bot.on('message', async (msg) => {
         }
     }
     })
+app.get('/web-data', (req, res) => {
+    res.status(404).send('Cannot GET /web-data');
+});
 
 app.post('/web-data', async (req, res) => {
     const {queryId, products, totalPrice } = req.body;
