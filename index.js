@@ -34,24 +34,27 @@ bot.on('message', async (msg) => {
             }
         })
     }
-        if(msg?.web_app_data?.data ){     // Если в сообщении прилетело вебеппдата и поле дата не пустое
-            try {
-                const data = JSON.parse(msg?.web_app_data?.data) // принимаем данные
-                console.log(data)
+    if (msg && msg.web_app_data && msg.web_app_data.data) {
+        // Если в сообщении прилетело вебеппдата и поле data не пустое
+        try {
+            const data = JSON.parse(msg.web_app_data.data); // принимаем данные
+            console.log(data);
 
-                await bot.sendMessage(chatId,'Спасибо за обратную связь!')
-                await bot.sendMessage(chatId,'Ваша страна: ' + data?.country);
-                await bot.sendMessage(chatId,'Улица: ' + data?.street)
+            if (data && data.country && data.street) {
+                await bot.sendMessage(chatId, 'Спасибо за обратную связь!');
+                await bot.sendMessage(chatId, 'Ваша страна: ' + data.country);
+                await bot.sendMessage(chatId, 'Улица: ' + data.street);
 
-                setTimeout(async () =>{
-                    await bot.sendMessage(chatId,'Всю информацию вы получите в этом чате')
-                },3000)
-            } catch (e){
-                console.log(e);
-
+                setTimeout(async () => {
+                    await bot.sendMessage(chatId, 'Вся информация будет отправлена в этот чат.');
+                }, 3000);
+            } else {
+                console.log('Некорректные данные:', data);
             }
-
+        } catch (e) {
+            console.log('Ошибка при разборе JSON:', e);
         }
+    }
     })
 
 app.post('/web-data', async (req, res) => {
