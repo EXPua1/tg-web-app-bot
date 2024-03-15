@@ -6,9 +6,11 @@ const cors = require('cors');
 const token = '7190231619:AAHLdtgH1EFrLsbKlboRUwZ4vppUOGAtyb0';
 
 // Create a bot that uses 'polling' to fetch new updates
-const webAppUrl = 'https://storied-entremet-88d966.netlify.app';
+const webAppUrl = 'https://storied-entremet-88d966.netlify.app'
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
+
+
 
 app.use(express.json());
 app.use(cors())
@@ -91,6 +93,6 @@ app.post('/web-data', async (req, res) => {
 
 
 
-const PORT = 8000;
+const PORT = 3001;
 
 app.listen(PORT, () => console.log('server started on PORT ' + PORT))
