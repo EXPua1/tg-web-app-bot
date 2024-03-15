@@ -1,6 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 
 // replace the value below with the Telegram token you receive from @BotFather
 const token = '7190231619:AAHLdtgH1EFrLsbKlboRUwZ4vppUOGAtyb0';
@@ -11,7 +12,7 @@ const bot = new TelegramBot(token, {polling: true});
 const app = express();
 
 
-
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors())
 
