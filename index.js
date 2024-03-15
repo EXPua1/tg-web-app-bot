@@ -63,7 +63,7 @@ bot.on('message', async (msg) => {
 
 
 
-app.get('/web-data', (req, res) => {
+app.all('/web-data', (req, res) => {
     res.status(405).send('Method Not Allowed');
 });
 app.post('/web-data', async (req, res) => {
