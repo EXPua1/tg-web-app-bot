@@ -56,56 +56,36 @@ bot.on('message', async (msg) => {
         }
     }
     })
-app.post('/web-data', async (req, res) => {
-    console.log('Received POST request to /web-data:', req.body); // Логирование тела запроса
-    const { queryId, products, totalPrice } = req.body;
-    try {
-        await bot.answerWebAppQuery(queryId, {
-            type: 'article',
-            id: queryId,
-            title: 'Успешная покупка',
-            input_message_content: { message_text: 'Поздравляю с покупкой, вы приобрели товар на сумму ' + totalPrice }
-        });
-        console.log('Successfully processed POST request to /web-data'); // Выводим сообщение об успешной обработке в консоль
-        return res.status(200).json({});
-    } catch (e) {
-        console.error('Error processing POST request to /web-data:', e); // Выводим сообщение об ошибке в консоль
-        await bot.answerWebAppQuery(queryId, {
-            type: 'article',
-            id: queryId,
-            title: 'Не удалось приобрести товар',
-            input_message_content: { message_text: 'Не удалось приобрести товар' }
-        });
-        return res.status(500).json({});
-    }
-});
+
 
 
 app.get('/web-data', (req, res) => {
     res.status(405).send('Method Not Allowed');
 });
 app.post('/web-data', async (req, res) => {
-    const {queryId, products, totalPrice } = req.body;
-    try{
-        await bot.answerWebAppQuery(queryId,{
+    const { queryId, products, totalPrice } = req.body;
+    try {
+        // Отправляем ответ об успешной покупке в Telegram
+        await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
             title: 'Успешная покупка',
-            input_message_content: {message_text: 'Поздравляю с покупкой, вы приобрели товар на сумму ' + totalPrice}
-
-        })
+            input_message_content: { message_text: 'Поздравляю с покупкой, вы приобрели товар на сумму ' + totalPrice }
+        });
+        // Отправляем статус 200 в качестве ответа
         return res.status(200).json({});
-    } catch (e){
+    } catch (e) {
+        // Если произошла ошибка, отправляем ответ о неудачной покупке в Telegram
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
             title: 'Не удалось приобрести товар',
-            input_message_content: {message_text: 'Не удалось приобрести товар'}
-    })
-        return res.status(500).json({})
-}
-
-})
+            input_message_content: { message_text: 'Не удалось приобрести товар' }
+        });
+        // Отправляем статус 500 в качестве ответа
+        return res.status(500).json({});
+    }
+});
 
 
 
