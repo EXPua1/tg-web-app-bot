@@ -66,6 +66,7 @@ app.get('/web-data', (req, res) => {
 });
 app.post('/web-data', async (req, res) => {
     const { queryId, products, totalPrice } = req.body;
+    console.log('Received POST request with data:', req.body); // Добавьте эту строку для вывода полученных данных в консоль
     try {
         // Отправляем ответ об успешной покупке в Telegram
         await bot.answerWebAppQuery(queryId, {
