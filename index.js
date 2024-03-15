@@ -15,10 +15,6 @@ const app = express();
 app.use(morgan('combined'));
 app.use(express.json());
 app.use(cors())
-app.use((req, res, next) => {
-    res.setHeader('Content-Security-Policy', "default-src 'self'; connect-src 'self' https://34.168.57.4:8000;");
-    next();
-});
 
 
 bot.on('message', async (msg) => {
