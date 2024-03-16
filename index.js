@@ -61,7 +61,7 @@ bot.on('message', async (msg) => {
         }
     }
     })
-
+app.get('/', async (req, res) => {res.json({hello: 'hello'})})
 app.post('/web-data', async (req, res) => {
     const { queryId, products, totalPrice } = req.body;
     console.log('Received POST request with data:', req.body); // Добавлен отладочный вывод
@@ -92,6 +92,6 @@ app.post('/web-data', async (req, res) => {
 
 
 
-const PORT = 8000;
+const PORT = 80;
 
 app.listen(PORT, () => console.log('server started on PORT ' + PORT))
