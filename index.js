@@ -10,6 +10,7 @@ const token = '7190231619:AAHLdtgH1EFrLsbKlboRUwZ4vppUOGAtyb0';
 const webAppUrl = 'https://storied-entremet-88d966.netlify.app'
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
+const queryId = `${Date.now()}_${userId}`;
 
 
 app.use(morgan('combined'));
